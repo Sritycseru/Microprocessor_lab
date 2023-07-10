@@ -1,4 +1,4 @@
-.model small
+ .model small
 .stack 100h
 .data
 
@@ -23,11 +23,12 @@ main proc
     
     cmp al,13
     je end_input
-    
-    sub al,48
+    cmp al,32
+    jle input
+    sub al,48 
+     
     mov arr[si],al
     inc si
-    
     jmp input
      
   end_input:  
@@ -37,12 +38,12 @@ main proc
     
   find_largest:
      cmp arr[si],'$'
-     je output
+     je output 
         
      cmp bl,arr[si]
      jg update_largest
         
-     inc si
+     inc si 
      jmp find_largest
         
   update_largest:
@@ -51,7 +52,7 @@ main proc
      jmp find_largest
  
  
- output:
+    output:
    call newline
    mov ah,9
    lea dx,msg2
@@ -79,5 +80,3 @@ newline proc
     newline endp
 
 end main
-
-    
